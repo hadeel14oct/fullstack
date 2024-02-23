@@ -1,24 +1,24 @@
-const express = require("express");
+import express, { json } from "express";
 const app = express();
-const cors = require("cors");
+import cors from "cors";
 
-app.use(express.json());
+app.use(json());
 app.use(cors());
 
-const db = require("./models");
+import db from "./models/index.js";
 
 // Routers
-const postRouter = require("./routes/Posts");
+import postRouter from "./routes/Posts.js";
 app.use("/posts", postRouter);
-const commentsRouter = require("./routes/Comments");
+import commentsRouter from "./routes/Comments.js";
 app.use("/comments", commentsRouter);
-const usersRouter = require("./routes/Users");
+import usersRouter from "./routes/Users.js";
 app.use("/auth", usersRouter);
-const likesRouter = require("./routes/Likes");
+import likesRouter from "./routes/Likes.js";
 app.use("/likes", likesRouter);
 
-db.sequelize.sync().then(() => {
+// db.sequelize.sync().then(() => {
   app.listen(3001, () => {
     console.log("Server running on port 3001");
   });
-});
+// });

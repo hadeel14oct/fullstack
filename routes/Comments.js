@@ -1,7 +1,7 @@
-const express = require("express");
-const router = express.Router();
-const { Comments } = require("../models");
-const { validateToken } = require("../middlewares/AuthMiddleware");
+import { Router } from "express";
+const router = Router();
+import Comments from "../models/Comments.js";
+import { validateToken } from "../middlewares/AuthMiddleware.js";
 
 router.get("/:postId", async (req, res) => {
   const postId = req.params.postId;
@@ -29,4 +29,4 @@ router.delete("/:commentId", validateToken, async (req, res) => {
   res.json("DELETED SUCCESSFULLY");
 });
 
-module.exports = router;
+export default router;

@@ -1,8 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const { Posts, Likes } = require("../models");
+import { Router } from "express";
+const router = Router();
+import Posts from "../models/Posts.js";
+import Likes from "../models/Likes.js";
 
-const { validateToken } = require("../middlewares/AuthMiddleware");
+import { validateToken } from "../middlewares/AuthMiddleware.js";
 
 router.get("/", validateToken, async (req, res) => {
   const listOfPosts = await Posts.findAll({ include: [Likes] });
@@ -56,4 +57,4 @@ router.delete("/:postId", validateToken, async (req, res) => {
   res.json("DELETED SUCCESSFULLY");
 });
 
-module.exports = router;
+export default router;

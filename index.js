@@ -1,20 +1,20 @@
 import express, { json } from "express";
-const app = express();
+import postRouter from "./routes/Posts.js";
 import cors from "cors";
+import commentsRouter from "./routes/Comments.js";
+import usersRouter from "./routes/Users.js";
+import likesRouter from "./routes/Likes.js";
+import db from "./models/index.js";
+
+const app = express();
 
 app.use(json());
 app.use(cors());
 
-import db from "./models/index.js";
-
 // Routers
-import postRouter from "./routes/Posts.js";
 app.use("/posts", postRouter);
-import commentsRouter from "./routes/Comments.js";
 app.use("/comments", commentsRouter);
-import usersRouter from "./routes/Users.js";
 app.use("/auth", usersRouter);
-import likesRouter from "./routes/Likes.js";
 app.use("/likes", likesRouter);
 
 // db.sequelize.sync().then(() => {
